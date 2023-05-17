@@ -36,11 +36,13 @@ class DeliveryResource extends Resource
     {
         $user = auth()->user();
 
+        $query = parent::getEloquentQuery()->orderByDesc('created_at');
+
         if ($user->role === 'driver') {
-            return parent::getEloquentQuery()->where('driver_id', $user->id);
+            return $query->where('driver_id', $user->id);
         }
 
-        return parent::getEloquentQuery();
+        return $query;
     }
 
     public static function form(Form $form): Form

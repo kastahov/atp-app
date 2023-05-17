@@ -51,6 +51,7 @@ class VehicleResource extends Resource
                     ->getSearchResultsUsing(
                         fn (string $search) => User::where('full_name', 'like', "%{$search}%")
                             ->where('role', '=', 'driver')
+                            ->doesntHave('vehicle')
                             ->limit(50)
                             ->pluck('full_name', 'id')
                     ),
