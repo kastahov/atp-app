@@ -13,12 +13,12 @@ class VehiclePolicy
 
     public function create(User $user)
     {
-        return $user->role === 'admin';
+        return in_array($user->role, ['admin', 'dispatcher']);
     }
 
     public function update(User $user)
     {
-        return in_array($user->role, ['admin', 'driver']);
+        return in_array($user->role, ['admin', 'driver', 'dispatcher']);
     }
 
     public function deleteAny(User $user)
